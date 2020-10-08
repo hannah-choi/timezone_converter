@@ -117,6 +117,9 @@ div.timezone div.timezone2{
     justify-content: space-between;
 }
 
+span.abbrZone{
+    border-radius: 40%;
+}
 
 div.day span.hour {
     /* width:70px; */
