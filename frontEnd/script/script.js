@@ -1,16 +1,31 @@
 
-let currentTimezone = moment.tz.guess();
-let city = function(){return `${currentTimezone}`.split("/").pop();}
-let now = function(){return moment().format('HH:mm')}
-let today = function(){return moment().format('ddd, DD MMM')}
-let countryName = function(){return moment.tz.zone(`${currentTimezone}`).countries()} 
-let abbrTimezone = function(){return moment.tz(`${currentTimezone}`).format("z")}
+const currentTimezone = moment.tz.guess();
+const selectedTimezone = "Europe/London"
+console.log(currentTimezone)
+console.log(moment().tz(`${selectedTimezone}`));
+
+
+const city = function(){return `${currentTimezone}`.split("/").pop();}
+const now = function(){return moment().format('HH:mm')}
+const today = function(){return moment().format('ddd, DD MMM')}
+const countryName = function(){return moment.tz.zone(`${currentTimezone}`).countries()} 
+const abbrTimezone = function(){return moment.tz(`${currentTimezone}`).format("z")}
+const hourNumber = moment().format('HH')
 
 const homeTime = document.querySelector('.homeTime')
 const homeCity = document.querySelector('.homeCity')
 const homeDate = document.querySelector('.homeDate')
 const homeCode = document.querySelector('.homeCode')
 const homeTimezone = document.querySelector('.abbrZone')
+const timeLineNode = document.querySelectorAll(`[data-tz="${currentTimezone}"]`)
+
+
+const timeLine = Array.from(timeLineNode);
+
+if(hourNumber){
+    let currentHour = timeLine.find(data=> data.textContent === hourNumber)
+    currentHour.classList.add('focus')
+}
 
 homeTime.innerHTML = now()
 homeCity.innerHTML = city()

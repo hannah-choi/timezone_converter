@@ -130,3 +130,9 @@ div.day span.hour {
     border:1px solid gray;
     height:35px;
 }
+
+span.focus {
+    /* width:70px; */
+    background-color: black;
+    color:white;
+}
