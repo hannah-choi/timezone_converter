@@ -10,7 +10,7 @@ const now = function(){return moment().format('HH:mm')}
 const today = function(){return moment().format('ddd, DD MMM')}
 const countryName = function(){return moment.tz.zone(`${currentTimezone}`).countries()} 
 const abbrTimezone = function(){return moment.tz(`${currentTimezone}`).format("z")}
-const hourNumber = moment().format('HH')
+let hourNumber = parseInt(moment().format('HH')) < 10 ? moment().format('HH').slice(-1) : moment().format('HH')
 
 const homeTime = document.querySelector('.homeTime')
 const homeCity = document.querySelector('.homeCity')
