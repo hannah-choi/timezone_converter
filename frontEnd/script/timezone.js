@@ -10,11 +10,11 @@ class Timezone{
     }
 
     getNow(){
-        return moment().format('HH:mm')
+        return moment.tz(`${this.currentTimezone}`).format('HH:mm')
     }
 
     getToday(){
-        return moment().format('ddd, DD MMM')
+        return moment.tz(`${this.currentTimezone}`).format('ddd, DD MMM')
     }
 
     getCountry(){
@@ -26,7 +26,7 @@ class Timezone{
     }
 
     getHourNumber(){
-        return parseInt(moment().format('HH')) < 10 ? moment().format('HH').slice(-1) : moment().format('HH')
+        return parseInt(moment.tz(`${this.currentTimezone}`).format('HH')) < 10 ? moment.tz(`${this.currentTimezone}`).format('HH').slice(-1) : moment.tz(`${this.currentTimezone}`).format('HH')
     }
 
     render(){

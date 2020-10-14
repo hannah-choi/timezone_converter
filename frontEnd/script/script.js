@@ -3,9 +3,10 @@ const timezoneList = document.querySelector('.timezoneList')
 
 let cityArray = [
     {city: 'Asia/Seoul'},
-    {city: 'Europe/Berlin'},
-    {city: 'America/Mexico_city'},
-    {city: 'Asia/Jerusalem'}
+    {city: 'Asia/Hong_kong'},
+    {city: 'Europe/Madrid'},
+    {city: 'Asia/Jerusalem'},
+    {city: 'America/Havana'},
 ]
 
 const cityList = cityArray.map(city => new Timezone(city.city))
