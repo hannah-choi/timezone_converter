@@ -5,7 +5,8 @@ class Timezone{
     }
 
     getCity(){
-        return `${this.currentTimezone}`.split("/").pop();
+        return `${this.currentTimezone}`.split("/").pop().replace('_',' ')
+
     }
 
     getNow(){
@@ -30,6 +31,7 @@ class Timezone{
 
     render(){
         return `
+            <div class="timezoneComp">
                 <div class="home">
                     <img src="images/placeholder.svg">
                 </div>
@@ -47,6 +49,7 @@ class Timezone{
                 <div class="modify">
                         <img src="images/cancel.svg" width="10px">
                 </div>
+            </div>
                 `
     }
 }

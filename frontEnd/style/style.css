@@ -10,11 +10,15 @@ body{
 
 div.wrapper{
     /* border:1px solid gray; */
-    width:70%;
+    width:75%;
     margin:200px auto;
     display: flex;
     flex-wrap: wrap;
     /* flex-direction: column; */
+}
+
+div.timezoneList{
+    width:30%;
 }
 
 div.home{
@@ -78,7 +82,7 @@ div.timezoneComp{
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size:8.5pt;
-    width:30%;
+    width:100%;
     display: flex;
     margin-bottom: 40px;
     /* border:1px solid salmon; */

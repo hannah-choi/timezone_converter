@@ -1,10 +1,19 @@
+import Timezone from './timezone.js'
+const timezoneList = document.querySelector('.timezoneList')
 
-import Timezone from './Timezone.js'
-const timezoneComps = document.querySelectorAll('.timezoneComp')
+let cityArray = [
+    {city: 'Asia/Seoul'},
+    {city: 'Europe/Berlin'},
+    {city: 'America/Mexico_city'},
+    {city: 'Asia/Jerusalem'}
+]
 
-timezoneComps.forEach((data)=>{
-    data.innerHTML = new Timezone('Asia/Tokyo').render()
-})
+const cityList = cityArray.map(city => new Timezone(city.city))
+const timezoneRender = cityList.map(city => city.render()).join('')
 
-console.log(moment.tz('Europe/London').format('HH:mm'))
+timezoneList.innerHTML = timezoneRender
+
+// timezoneComps.forEach((data)=>{
+//     data.innerHTML = new Timezone('Asia/Tokyo').render()
+// })
 
