@@ -1,5 +1,7 @@
 import Timezone from './timezone.js'
 const timezoneList = document.querySelector('.timezoneList')
+const searchInput = document.querySelector('.searchInput')
+const suggestionList = document.querySelector('.suggestionList')
  
 let cityArray = [
     {city: 'Asia/Seoul'},
@@ -14,30 +16,51 @@ const timezoneRender = cityList.map(city => city.render()).join('')
 
 timezoneList.innerHTML = timezoneRender
 
-const countryNames = moment.tz._countries
-console.log(countryNames) //원본데이터
+const timezoneDb = Object.entries(moment.tz._countries).map(([country, { zones }]) => ({
+    country,
+    zones
+  }));;
 
-const countries1 = Object.values(countryNames)
-//const countries2 = Object.values(countryNames).map(data => data)
-let map = countries1.map(data => data['country'])
+  console.log(timezoneDb)
 
-//split('|')[0]
-//console.log(countries1)
-console.log(countries1)
-console.log(map)
-
-const timezoneDb = [];
-
-fetch("./script/latest.json")
-.then(res => res.json())
-.then(data => timezoneDb.push(data))
+// fetch("./script/latest.json")
+// .then(res => res.json())
+// .then(data => timezoneDb.push(data))
 
 function findMatches(typedWord, timezoneDb){
     return timezoneDb.filter(timezone => {
         const regex = new RegExp(typedWord, 'gi')
-        return timezone.name.match(regex)
+        return timezone.country.match(regex) || timezone.zones.find(zone => zone.match(regex))
     })
 }
+
+console.log(findMatches('isr',timezoneDb))
+
+function displayMatches(){
+    let matchArray = findMatches(this.value, timezoneDb)
+    if(this.value.length === 0){
+        matchArray = [];
+        suggestionList.innerHTML = '';
+    }
+    if(this.value.length === 0 || matchArray === [] || suggestionList.innerHTML === ''){
+        suggestionList.style.opacity = '0'
+    } else {
+        suggestionList.style.opacity = '1'
+    }
+    suggestionList.style.border = "1px solid gray";
+    const list = matchArray.map(data => {
+        const regex = new RegExp(this.value, 'gi')
+        const zoneName = data.zones[0].replace(regex, `<span class="highlight">${this.value}</span>`)
+        const countryName = data.country.replace(regex, `<span class="highlight">${this.value}</span>`)
+        return `
+            <li class= "suggestionItem">
+            <span class="listTimezone">${zoneName}</span><span class="listCountry">${countryName}</span></li>
+        `
+    }).join('')
+    suggestionList.innerHTML = list
+}
+
+searchInput.addEventListener('input', displayMatches)
 
 
 // timezoneComps.forEach((data)=>{

@@ -61,7 +61,7 @@ div.search{
 }
 
 div.search input[type=text]{
-    width:200px;
+    width:400px;
     padding:6px;
 }
 
@@ -139,4 +139,34 @@ span.focus {
     /* width:70px; */
     background-color: black;
     color:white;
+}
+
+ul.suggestionList {
+    width: 400px;
+    margin-top:5px;
+    padding:0;
+    z-index: 10;
+    list-style-type: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size:9pt;
+    /* border:1px solid gray; */
+    position: absolute;
+}
+
+ul.suggestionList li{
+    display: flex;
+    justify-content: space-between;
+    margin:0;
+    padding:10px;
+    background:white;
+}
+
+ul.suggestionList .listCountry{
+    text-align: right;
+    width: 45%;
+}
+
+span.highlight {
+    background-color: gainsboro;
 }
