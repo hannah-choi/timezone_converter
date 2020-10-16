@@ -1,7 +1,4 @@
-
-
-
-const latest = [{
+{
 	"countries": {
 		"AD": {
 			"name": "Andorra",
@@ -5901,6 +5898,3 @@ const latest = [{
 		}
 	}
 }
-]
-
-const jsObj = JSON.stringify(latest)
