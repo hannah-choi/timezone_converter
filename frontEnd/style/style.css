@@ -150,7 +150,7 @@ ul.suggestionList {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size:9pt;
-    /* border:1px solid gray; */
+    border:1px solid gray;
     position: absolute;
 }
 

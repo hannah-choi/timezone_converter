@@ -2,10 +2,7 @@ import Timezone from './timezone.js'
 import Search from './search.js'
 const timezoneList = document.querySelector('.timezoneList')
 const searchInput = document.querySelector('.searchInput')
-const timezoneDb = Object.entries(moment.tz._countries).map(([country, { zones }]) => ({
-    country,
-    zones
-  }));;
+const timezoneDb = Object.keys(moment.tz._zones).map(data=> data.replace('_','/')).map(data=> data.replace('_',' '))
 const search = new Search(timezoneDb)
  
 let cityArray = [

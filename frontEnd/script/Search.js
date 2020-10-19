@@ -3,34 +3,28 @@ class Search{
     constructor(timezoneDb){
         this.timezoneDb = timezoneDb
         this.suggestionList = document.querySelector('.suggestionList')
+        this.matchArray;
     }
 
     findMatches(typedWord, timezoneDb){
-        return timezoneDb.filter(timezone => {
-            const regex = new RegExp(typedWord, 'gi')
-            return timezone.country.match(regex) || timezone.zones.find(zone => zone.match(regex))
-        })
+        const regex = new RegExp(typedWord, 'gi')
+        return timezoneDb.filter(timezone => timezone.match(regex))
     }
 
     displayMatches = (value) => {
-        let matchArray = this.findMatches(value, this.timezoneDb)
+        //let matchArray = value.length !== 0 ? this.findMatches(value, this.timezoneDb): [];
         if(value.length === 0){
-            matchArray = [];
-            this.suggestionList.innerHTML = '';
-        }
-        if(value.length === 0 || matchArray === [] || this.suggestionList.innerHTML === ''){
+            this.matchArray = [];
             this.suggestionList.style.opacity = '0'
         } else {
-            this.suggestionList.style.opacity = '1'
-        }
-        this.suggestionList.style.border = "1px solid gray";
-        const list = matchArray.map(data => {
+            this.matchArray = this.findMatches(value, this.timezoneDb)
+            this.suggestionList.style.opacity = '1'}
+        const list = this.matchArray.map(data => {
             const regex = new RegExp(value, 'gi')
-            const zoneName = data.zones[0].replace(regex, `<span class="highlight">${value}</span>`)
-            const countryName = data.country.replace(regex, `<span class="highlight">${value}</span>`)
+            let timezoneName = data.replace(regex, `<span class="highlight">${value}</span>`)
             return `
                 <li class= "suggestionItem">
-                <span class="listTimezone">${zoneName}</span><span class="listCountry">${countryName}</span></li>
+                <span class="listTimezone">${timezoneName}</span></li>
             `
         }).join('')
         this.suggestionList.innerHTML = list
