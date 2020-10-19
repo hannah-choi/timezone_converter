@@ -10,11 +10,15 @@ body{
 
 div.wrapper{
     /* border:1px solid gray; */
-    width:70%;
+    width:75%;
     margin:200px auto;
     display: flex;
     flex-wrap: wrap;
     /* flex-direction: column; */
+}
+
+div.timezoneList{
+    width:30%;
 }
 
 div.home{
@@ -57,7 +61,7 @@ div.search{
 }
 
 div.search input[type=text]{
-    width:200px;
+    width:400px;
     padding:6px;
 }
 
@@ -78,7 +82,7 @@ div.timezoneComp{
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size:8.5pt;
-    width:30%;
+    width:100%;
     display: flex;
     margin-bottom: 40px;
     /* border:1px solid salmon; */
@@ -135,4 +139,35 @@ span.focus {
     /* width:70px; */
     background-color: black;
     color:white;
+}
+
+ul.suggestionList {
+    width: 400px;
+    margin-top:5px;
+    padding:0;
+    z-index: 10;
+    list-style-type: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size:9pt;
+    border:1px solid gray;
+    position: absolute;
+    opacity: 0;
+}
+
+ul.suggestionList li{
+    display: flex;
+    justify-content: space-between;
+    margin:0;
+    padding:10px;
+    background:white;
+}
+
+ul.suggestionList .listCountry{
+    text-align: right;
+    width: 45%;
+}
+
+span.highlight {
+    background-color: gainsboro;
 }
