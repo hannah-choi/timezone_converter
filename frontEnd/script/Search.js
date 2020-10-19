@@ -13,11 +13,10 @@ class Search{
 
     displayMatches = (value) => {
         if(value.length === 0){
-            this.suggestionList.style.border = 'none'
-            this.suggestionList.opacity = '0'
+            this.suggestionList.style.opacity = '0'
             this.suggestionList.innerHTML = ''
         } else {
-            this.matchArray = this.findMatches(value, this.timezoneDb)
+            this.matchArray = this.findMatches(value, this.timezoneDb).slice(0,10)
             this.suggestionList.style.opacity = '1'
         }
         this.suggestionList.style.border = this.matchArray.length === 0 ? 'none':'1px solid gray'
