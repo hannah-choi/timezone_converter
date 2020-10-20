@@ -24,7 +24,7 @@ class Search{
             const regex = new RegExp(value, 'gi')
             let timezoneName = data.replace(regex, `<span class="highlight">${value}</span>`)
             return `
-                <li class= "suggestionItem">
+                <li class= "suggestionItem" data-zone="${data}">
                 <span class="listTimezone">${timezoneName}</span></li>
             `
         }).join('')
