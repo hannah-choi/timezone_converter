@@ -18,14 +18,23 @@ timezoneList.innerHTML = cityList.map(city => city.render()).join('')
 searchInput.addEventListener('input', (e) => {search.displayMatches(e.target.value)})
 
 suggestionList.addEventListener('click', (e)=>{
-    if (e.target.tagName !== 'LI'){
-        return;
+    function addZone(target) {
+        const zoneName = target.dataset.zone.replace(' ','_').split('/')
+        .map(data => data[0].toUpperCase() + data.substr(1).toLowerCase()).join('/')
+        cityList.push(new Timezone(zoneName))
+        timezoneList.innerHTML = cityList.map(city => city.render()).join('')
     }
-    const zoneName = e.target.dataset.zone.replace(' ','_').split('/')
-                    .map(data => data[0].toUpperCase() + data.substr(1).toLowerCase()).join('/')
-    cityList.push(new Timezone(zoneName))
-    timezoneList.innerHTML = cityList.map(city => city.render()).join('')
-    //console.log(cityList)
+    switch (e.target.className){
+        case 'suggestionItem':
+            addZone(e.target)
+            break;
+        case 'listTimezone':
+            addZone(e.target.parentElement)
+            break;
+        case 'highlight':
+            addZone(e.target.parentElement.parentElement)
+            break;
+        default:
+            return;
+    }
 })
-
-
