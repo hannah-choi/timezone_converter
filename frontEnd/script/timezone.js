@@ -18,11 +18,19 @@ class Timezone{
     }
 
     getCountry(){
-        return moment.tz.zone(`${this.currentTimezone}`).countries()
+        
+        let countryName = moment.tz.zone(`${this.currentTimezone}`).countries()
+        console.log(countryName)
+        if(countryName.length > 1){ return countryName[1];}
+        return countryName;
     }
 
     getAbbr(){
         return moment.tz(`${this.currentTimezone}`).format("z")
+    }
+
+    getOffset(){
+        return moment.tz(`${this.currentTimezone}`).format("Z").split(':').shift()
     }
 
     getHourNumber(){
@@ -30,10 +38,11 @@ class Timezone{
     }
 
     render(){
+        //<img src="images/placeholder.svg">
         return `
             <div class="timezoneComp">
                 <div class="home">
-                    <img src="images/placeholder.svg">
+                    ${this.getOffset()}
                 </div>
                 <div class="timezone">
                     <div class="timezone1">

@@ -1,6 +1,9 @@
 import Timezone from './timezone.js'
 import Search from './search.js'
+import Hour from './hour.js'
+//import Search from './search.js'
 const timezoneList = document.querySelector('.timezoneList')
+const hourComponent = document.querySelector('.hoursComp')
 const searchInput = document.querySelector('.searchInput')
 const timezoneDb = Object.keys(moment.tz._zones).map(data=> data.replace('_','/')).map(data=> data.replace('_',' '))
 const search = new Search(timezoneDb)
@@ -14,6 +17,9 @@ let cityArray = [
 
 const cityList = cityArray.map(city => new Timezone(city.city))
 timezoneList.innerHTML = cityList.map(city => city.render()).join('')
+
+//const hourList = new Hour(0)
+hourComponent.innerHTML = new Hour(0).render()
 
 searchInput.addEventListener('input', (e) => {search.displayMatches(e.target.value)})
 
