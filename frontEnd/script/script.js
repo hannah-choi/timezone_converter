@@ -4,19 +4,37 @@ const timezoneList = document.querySelector('.timezoneList')
 const searchInput = document.querySelector('.searchInput')
 const timezoneDb = Object.keys(moment.tz._zones).map(data=> data.replace('_','/')).map(data=> data.replace('_',' '))
 const search = new Search(timezoneDb)
+const suggestionList = document.querySelector('.suggestionList')
  
 let cityArray = [
     {city: 'Asia/Seoul'},
     {city: 'Asia/Hong_kong'},
     {city: 'Europe/Madrid'},
-    {city: 'Asia/Jerusalem'},
-    {city: 'America/Havana'},
 ]
 
 const cityList = cityArray.map(city => new Timezone(city.city))
-const timezoneRender = cityList.map(city => city.render()).join('')
-timezoneList.innerHTML = timezoneRender
+timezoneList.innerHTML = cityList.map(city => city.render()).join('')
 
 searchInput.addEventListener('input', (e) => {search.displayMatches(e.target.value)})
 
-
+suggestionList.addEventListener('click', (e)=>{
+    function addZone(target) {
+        const zoneName = target.dataset.zone.replace(' ','_').split('/')
+        .map(data => data[0].toUpperCase() + data.substr(1).toLowerCase()).join('/')
+        cityList.push(new Timezone(zoneName))
+        timezoneList.innerHTML = cityList.map(city => city.render()).join('')
+    }
+    switch (e.target.className){
+        case 'suggestionItem':
+            addZone(e.target)
+            break;
+        case 'listTimezone':
+            addZone(e.target.parentElement)
+            break;
+        case 'highlight':
+            addZone(e.target.parentElement.parentElement)
+            break;
+        default:
+            return;
+    }
+})

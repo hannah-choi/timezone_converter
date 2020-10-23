@@ -153,6 +153,7 @@ ul.suggestionList {
     border:1px solid gray;
     position: absolute;
     opacity: 0;
+    z-index: 10;
 }
 
 ul.suggestionList li{
@@ -161,7 +162,14 @@ ul.suggestionList li{
     margin:0;
     padding:10px;
     background:white;
+    cursor: hand;
 }
+
+ul.suggestionList li:hover{
+    background: black;
+    color:white;
+}
+
 
 ul.suggestionList .listCountry{
     text-align: right;
