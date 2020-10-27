@@ -1,7 +1,7 @@
 class Search{
 
-    constructor(timezoneDb){
-        this.timezoneDb = timezoneDb
+    constructor(){
+        this.timezoneDb = Object.keys(moment.tz._zones).map(data=> data.replace('_','/')).map(data=> data.replace('_',' '))
         this.suggestionList = document.querySelector('.suggestionList')
         this.matchArray = [];
     }

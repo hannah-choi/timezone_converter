@@ -1,12 +1,12 @@
 
 class Timezone{
-    constructor(city){
+    constructor(city, offset){
         this.currentTimezone = city
+        this.offset = offset
     }
 
     getCity(){
         return `${this.currentTimezone}`.split("/").pop().replace('_',' ')
-
     }
 
     getNow(){
@@ -18,9 +18,7 @@ class Timezone{
     }
 
     getCountry(){
-        
         let countryName = moment.tz.zone(`${this.currentTimezone}`).countries()
-        console.log(countryName)
         if(countryName.length > 1){ return countryName[1];}
         return countryName;
     }
@@ -33,17 +31,17 @@ class Timezone{
         return moment.tz(`${this.currentTimezone}`).format("Z").split(':').shift()
     }
 
+ 
     getHourNumber(){
         return parseInt(moment.tz(`${this.currentTimezone}`).format('HH')) < 10 ? moment.tz(`${this.currentTimezone}`).format('HH').slice(-1) : moment.tz(`${this.currentTimezone}`).format('HH')
     }
 
     render(){
-        //<img src="images/placeholder.svg">
         return `
             <div class="timezoneComp">
                 <div class="home">
-                    ${this.getOffset()}
-                </div>
+                ${this.offset != 0 ? this.offset:'<img src="./../frontEnd/images/placeholder.svg">'}
+                                    </div>
                 <div class="timezone">
                     <div class="timezone1">
                         <span class="cityName homeCity">${this.getCity()}</span>

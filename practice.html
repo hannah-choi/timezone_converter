@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+
+    <style>
+
+        span{
+            padding:5px;
+            border: 1px solid gray;
+        }
+
+        .active{
+            color:red;
+        }
+
+    </style>
+
+
+    <div>
+        <input type="text" value="0">
+        <button>button</button>
+    </div>
+
+    <div id="app">
+
+    </div>
+
+    <script>
+
+        const input = document.querySelector('input')
+        const app = document.querySelector('#app')
+        const button = document.querySelector('button')
+
+        button.addEventListener('click', (e)=>{
+            for(let i=0; i<input.value; i++){
+                app.innerHTML += `<span>${i}</span>`
+            }
+            for(let i = input.value; i<7; i++){
+                app.innerHTML += `<span ${i === input.value ? 'class="active"':''}>${i}</span>`
+            }
+        })
+
+
+    </script>
+
+    
+</body>
+</html>
