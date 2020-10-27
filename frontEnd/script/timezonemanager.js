@@ -1,9 +1,6 @@
 import Timezone from './timezone.js'
 import Hour from './hour.js'
 
-//hourComponent.innerHTML = new Hour(0).render()
-
-
 class TimezoneManager{
 
     constructor(){
@@ -23,7 +20,8 @@ class TimezoneManager{
 
     getDifference(city){
         let currentOffset = moment.tz(city).utcOffset()/60 //9
-        let difference = (this.defaultOffset - currentOffset) < 1 ? `${this.defaultOffset - currentOffset}`.replace('-','+') : '-' + (this.defaultOffset - currentOffset);
+        let displayOffset = this.defaultOffset - currentOffset
+        let difference = displayOffset < 1 ? `${displayOffset}`.replace('-','+') : '-' + (displayOffset);
         return difference;
     }
 
@@ -35,19 +33,6 @@ class TimezoneManager{
         this.hourList.push(new Hour(zoneName, parseInt(this.getDifference(zoneName))))
         this.hoursList.innerHTML = this.hourList.map(hour=>hour.render()).join('')
     }
-
-    deleteTimezone(){
-
-    }
-
-
-    setDefault(){
-    }
-
-    listRender(){
-    
-    }
-
 }
 
 export default TimezoneManager;

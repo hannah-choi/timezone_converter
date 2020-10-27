@@ -2,7 +2,6 @@ class Hour{
     constructor(city, offset){
         this.city = city
         this.offset = offset
-        //this.date = date;
     }
 
     getNow(){
@@ -40,29 +39,17 @@ class Hour{
                 hours += `<span class=${i === 0 ? 'date':''} ${i===this.getNow()? 'focus':''}>${i === 0 ? this.getTomorrow():i}</span>`
             }
         }
-
         return hours;
-
-        // for(let i = 0; i < (23 + this.offset); i++){
-        //     hours += `<span ${i === 18 ? 'class="active hour"':'class="hour"'}>${i}</span>`
-        // }
-
-
-        // for(let i = this.startNumber; i<this.startNumber+24; i++){
-        //     let number = `<span class="hour" data-tz="Asia/Seoul">${i}</span>`
-        //     hourArray.push(number)
-        // }
-        
     }
 
     render(){
         return `
-        <div class="hoursComp">
-        <div class="day">
-        ${this.getHours()}
-        </div>
-        </div>
-    `
+            <div class="hoursComp">
+                <div class="day">
+                    ${this.getHours()}
+                </div>
+            </div>
+        `
     }
 }
 
