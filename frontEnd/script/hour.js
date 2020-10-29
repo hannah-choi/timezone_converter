@@ -18,27 +18,13 @@ class Hour{
 
     getHours(){
         let hours = '';
-        if(this.offset===0){
-            for(let i = this.offset; i<24; i++){
-                hours += `<span class=${i === 0 ? 'date':''} ${i===this.getNow()? 'focus':''}>${i === 0 ? this.getToday():i}</span>`
+        console.log(this.offset)
+            for(let i = `${this.offset < 0? (24 + this.offset) : this.offset}`; i < 24; i++){
+                hours += `<span class =${i === 0 ? 'date':''} ${i===this.getNow()? 'focus':''}>${i === 0 ? this.getToday():i}</span>`
             }
-        }
-        else if(this.offset<0){
-            for(let i = (24 + this.offset); i < 24; i++){
-                hours += `<span class = ${i===this.getNow()? 'focus':''}>${i}</span>`
+            for(let i = 0; i < `${this.offset < 0? (24 + this.offset) : this.offset}`; i++){
+                hours += `<span class=${i === 0 ? 'date':''} ${i===this.getNow()? 'focus':''}>${i === 0 ? (this.offset < 0 ? this.getToday() : this.getTomorrow()) :i}</span>`
             }
-            for(let i = 0; i < (24 + this.offset); i++){
-                hours += `<span class=${i === 0 ? 'date':''} ${i===this.getNow()? 'focus':''}>${i === 0 ? this.getToday():i}</span>`
-            }
-        }
-        else {
-            for(let i = this.offset; i < 24; i++){
-                hours += `<span class = ${i===this.getNow()? 'focus':''}>${i}</span>`
-            }
-            for(let i = 0; i < this.offset; i++){
-                hours += `<span class=${i === 0 ? 'date':''} ${i===this.getNow()? 'focus':''}>${i === 0 ? this.getTomorrow():i}</span>`
-            }
-        }
         return hours;
     }
 
