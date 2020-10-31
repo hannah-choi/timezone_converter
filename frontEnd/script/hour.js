@@ -1,7 +1,8 @@
 class Hour{
-    constructor(city, offset){
+    constructor(city, offset, gmt){
         this.city = city
         this.offset = offset
+        this.gmt = gmt
     }
 
     getNow(){
@@ -20,6 +21,9 @@ class Hour{
         return `${i === 0 ? 'date':''} ${i===this.getNow()? 'focus':''}`
     }
 
+    getDate(i){
+        return i === 0 ? (this.gmt < 0 ? this.getTomorrow() : this.getToday()) :i
+    }
 
     getHours(){
         let hours = '';
@@ -28,7 +32,7 @@ class Hour{
             hours += `<span class = "${this.getClass(i)}">${i === 0 ? this.getToday():i}</span>`
         }
         for(let i = 0; i < number; i++){
-            hours += `<span class="${this.getClass(i)}">${i === 0 ? (this.offset < 0 ? this.getToday() : this.getTomorrow()) :i}</span>`
+            hours += `<span class="${this.getClass(i)}">${this.getDate(i)}</span>`
         }
         return hours;
     }

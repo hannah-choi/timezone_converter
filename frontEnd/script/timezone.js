@@ -13,6 +13,7 @@ class Timezone{
         return moment.tz(`${this.currentTimezone}`).format('HH:mm')
     }
 
+
     getToday(){
         return moment.tz(`${this.currentTimezone}`).format('ddd, DD MMM')
     }

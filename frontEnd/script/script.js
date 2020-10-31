@@ -9,7 +9,6 @@ const suggestionList = document.querySelector('.suggestionList')
 const timezoneManager = new TimezoneManager()
 
 //const hourList = new Hour(0)
-
 searchInput.addEventListener('input', (e) => {search.displayMatches(e.target.value)})
 
 suggestionList.addEventListener('click', (e)=>{

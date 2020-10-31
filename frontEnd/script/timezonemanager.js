@@ -4,12 +4,7 @@ import Hour from './hour.js'
 class TimezoneManager{
 
     constructor(){
-        this.cityArray = [
-            // {city: 'Asia/Seoul'},
-            // {city: 'Asia/Hong_kong'},
-            // {city: 'America/New_York'},
-            // {city: 'Austrailia/Sydney'}
-        ]
+        this.cityArray = [];
         this.cityList = [];
         this.hourList = [];
         this.timezoneList = document.querySelector('.timezoneList')
@@ -18,19 +13,23 @@ class TimezoneManager{
         this.defaultOffset = moment.tz(`${this.defaultTimezone}`).utcOffset()/60; 
     }
 
+    getGMT(city){
+        return moment.tz(city).utcOffset()/60
+    }
+
     getDifference(city){
-        let currentOffset = moment.tz(city).utcOffset()/60 //9
-        let displayOffset = this.defaultOffset - currentOffset
+        let displayOffset = this.defaultOffset - this.getGMT(city)
         let difference = displayOffset < 1 ? `${displayOffset}`.replace('-','+') : '-' + (displayOffset);
         return difference;
     }
 
     addZone(target) {
-        const zoneName = target.dataset.zone.replace(' ','_').split('/')
+        const cityName = target.dataset.zone.replace(' ','_')
+        const zoneName = cityName.split('/')
         .map(data => data[0].toUpperCase() + data.substr(1).toLowerCase()).join('/')
         this.cityList.push(new Timezone(zoneName, this.getDifference(zoneName)))
         this.timezoneList.innerHTML = this.cityList.map(city => city.render()).join('')
-        this.hourList.push(new Hour(zoneName, parseInt(this.getDifference(zoneName))))
+        this.hourList.push(new Hour(zoneName, parseInt(this.getDifference(zoneName)), this.getGMT(cityName)))
         this.hoursList.innerHTML = this.hourList.map(hour=>hour.render()).join('')
     }
 }
