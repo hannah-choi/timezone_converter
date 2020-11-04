@@ -11,6 +11,8 @@ class TimezoneManager{
         this.hoursList = document.querySelector('.hoursList')
         this.defaultTimezone = moment.tz.guess()
         this.defaultOffset = moment.tz(`${this.defaultTimezone}`).utcOffset()/60; 
+        this.suggestionList = document.querySelector('.suggestionList')
+        this.searchInput = document.querySelector('.searchInput')
     }
 
     getGMT(city){
@@ -31,6 +33,9 @@ class TimezoneManager{
         this.timezoneList.innerHTML = this.cityList.map(city => city.render()).join('')
         this.hourList.push(new Hour(zoneName, parseInt(this.getDifference(zoneName)), this.getGMT(cityName)))
         this.hoursList.innerHTML = this.hourList.map(hour=>hour.render()).join('')
+        this.suggestionList.style.opacity = 0;
+        this.searchInput.value = '';
+        
     }
 }
 

@@ -1,38 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap");
 
-body{
-    font-family: 'Lato', sans-serif;
+body {
+    font-family: "Lato", sans-serif;
 }
 
 * {
     box-sizing: border-box;
 }
 
-div.wrapper{
+div.wrapper {
     /* border:1px solid gray; */
-    width:75%;
-    margin:200px auto;
+    width: 75%;
+    margin: 200px auto;
     display: flex;
     flex-wrap: wrap;
     /* flex-direction: column; */
 }
 
-div.timezoneList{
-    width:30%;
+div.timezoneList {
+    width: 30%;
 }
 
-div.home{
-    width:6%;
+div.home {
+    width: 6%;
     font-size: 8pt;
     margin-right: 13px;
     text-align: center;
     vertical-align: center;
 }
 
-div.modify{
-    width:2%;
-    margin-left:20px;
-    margin-right:30px;
+div.modify {
+    width: 2%;
+    margin-left: 20px;
+    margin-right: 30px;
     display: flex;
     flex-wrap: wrap;
     align-content: space-between;
@@ -40,157 +40,158 @@ div.modify{
     /* background-color: salmon; */
 }
 
-
-div.home img{
-    width:15px;
+div.home img {
+    width: 15px;
 }
 
-div.modify img{
-   width:15px;
-   display: block;
-}
-
-div.modify img:first-of-type{
-    width:10px; 
+div.modify img {
+    width: 15px;
     display: block;
-    margin-top:3px;
- }
+}
 
-div.search{
-    width:100%;
+div.modify img:first-of-type {
+    width: 10px;
+    display: block;
+    margin-top: 3px;
+}
+
+div.search {
+    width: 100%;
     padding: 20px 0;
     margin-bottom: 10px;
 }
 
-div.search input[type=text]{
-    width:400px;
-    padding:6px;
+div.search input[type="text"] {
+    width: 400px;
+    padding: 6px;
 }
 
-input[type=submit]{
-    outline:none;
-    border:none;
-    padding:8px 12px;
+input[type="submit"] {
+    outline: none;
+    border: none;
+    padding: 8px 12px;
     color: white;
     background-color: black;
     font-family: inherit;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size:9pt;
+    font-size: 9pt;
 }
 
-
-div.timezoneComp{
+div.timezoneComp {
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size:8.5pt;
-    width:100%;
+    font-size: 8.5pt;
+    width: 100%;
     display: flex;
     margin-bottom: 40px;
     /* border:1px solid salmon; */
 }
 
-div.hoursList{
-    width:69%;
+div.hoursList {
+    width: 69%;
 }
 
-div.hoursComp{
-    width:100%;
+div.hoursComp {
+    width: 100%;
     /* border:1px solid purple; */
     display: flex;
-    height:45px;
-    padding:0;
+    height: 45px;
+    padding: 0;
     margin-bottom: 37px;
 }
 
-div.hoursComp div.day{
+div.hoursComp div.day {
     display: flex;
 }
 
-div.timezone{
+div.timezone {
     width: 75%;
     /* background-color: lavender; */
 }
 
-div.timezone div.timezone1{
+div.timezone div.timezone1 {
     font-size: 11pt;
     margin-bottom: 12px;
 }
 
-div.timezone div.timezone2{
-    color:#6e6e6e;
+div.timezone div.timezone2 {
+    color: #6e6e6e;
 }
 
 div.timezone div.timezone1,
-div.timezone div.timezone2{
+div.timezone div.timezone2 {
     display: flex;
     justify-content: space-between;
 }
 
-span.abbrZone{
+span.abbrZone {
     border-radius: 40%;
 }
 
-div.day span {
+div.day div {
     /* width:70px; */
-    width:33px;
-    padding:10px 0;
+    width: 33px;
+    padding: 10px 0;
     font-size: 10pt;
     text-align: center;
-    border:1px solid rgb(238, 224, 224);
-    height:35px;
+    border: 1px solid rgb(238, 224, 224);
+    height: 35px;
 }
 
-div.day span.date {
+div.day div.date {
     /* width:70px; */
-    padding:2px 0;
+    padding: 2px 0;
     font-size: 8pt;
     text-align: center;
-    border:1px solid rgb(238, 224, 224);
-    height:35px;
+    border: 1px solid rgb(238, 224, 224);
+    height: 35px;
 }
 
-span.focus {
+div.focus {
     /* width:70px; */
     background-color: black;
-    color:white;
+    color: white;
 }
 
 ul.suggestionList {
     width: 400px;
-    margin-top:5px;
-    padding:0;
+    margin-top: 5px;
+    padding: 0;
     z-index: 10;
     list-style-type: none;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size:9pt;
-    border:1px solid gray;
+    font-size: 9pt;
+    border: 1px solid gray;
     position: absolute;
     opacity: 0;
     z-index: 10;
 }
 
-ul.suggestionList li{
+ul.suggestionList li {
     display: flex;
     justify-content: space-between;
-    margin:0;
-    padding:10px;
-    background:white;
+    margin: 0;
+    padding: 10px;
+    background: white;
     cursor: hand;
 }
 
-ul.suggestionList li:hover{
+ul.suggestionList li:hover {
     background: black;
-    color:white;
+    color: white;
 }
 
-
-ul.suggestionList .listCountry{
+ul.suggestionList .listCountry {
     text-align: right;
     width: 45%;
 }
 
-span.highlight {
+div.highlight {
     background-color: gainsboro;
+}
+
+.selected {
+    background: brown;
 }
