@@ -22,17 +22,17 @@ class Hour{
     }
 
     getDate(i){
-        return i === 0 ? (this.gmt < 0 ? this.getToday():this.getTomorrow()) :i
+        return i === 0 ? (this.gmt < 0 ? this.getTomorrow():this.getToday()) :i
     }
 
     getHours(){
         let hours = '';
         let number = this.offset < 0 ? (24 + this.offset) : this.offset
         for(let i = number; i < 24; i++){
-            hours += `<div class = "${this.getClass(i)} selection">${i === 0 ? this.getToday():i}</div>`
+            hours += `<span class = "${this.getClass(i)} selection">${i === 0 ? this.getToday():i}</span>`
         }
         for(let i = 0; i < number; i++){
-            hours += `<div class="${this.getClass(i)} selection">${this.getDate(i)}</div>`
+            hours += `<span class="${this.getClass(i)} selection">${this.getDate(i)}</span>`
         }
         return hours;
     }

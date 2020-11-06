@@ -8,6 +8,12 @@ body {
     box-sizing: border-box;
 }
 
+h2 {
+    font-size: 13pt;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
 div.wrapper {
     /* border:1px solid gray; */
     width: 75%;
@@ -129,8 +135,8 @@ span.abbrZone {
     border-radius: 40%;
 }
 
-div.day div {
-    /* width:70px; */
+div.day span {
+    /* width: 70px; */
     width: 33px;
     padding: 10px 0;
     font-size: 10pt;
@@ -139,7 +145,7 @@ div.day div {
     height: 35px;
 }
 
-div.day div.date {
+div.day .date {
     /* width:70px; */
     padding: 2px 0;
     font-size: 8pt;
@@ -148,7 +154,7 @@ div.day div.date {
     height: 35px;
 }
 
-div.focus {
+span.focus {
     /* width:70px; */
     background-color: black;
     color: white;
@@ -188,7 +194,7 @@ ul.suggestionList .listCountry {
     width: 45%;
 }
 
-div.highlight {
+span.highlight {
     background-color: gainsboro;
 }
 
