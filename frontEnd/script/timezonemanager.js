@@ -1,9 +1,10 @@
 import Timezone from './timezone.js'
 import Hour from './hour.js'
 
+
 class TimezoneManager{
 
-    constructor(){
+    constructor(ds){
         this.cityArray = [];
         this.cityList = [];
         this.hourList = [];

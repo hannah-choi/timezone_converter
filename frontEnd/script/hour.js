@@ -29,10 +29,10 @@ class Hour{
         let hours = '';
         let number = this.offset < 0 ? (24 + this.offset) : this.offset
         for(let i = number; i < 24; i++){
-            hours += `<span class = "${this.getClass(i)} selection">${i === 0 ? this.getToday():i}</span>`
+            hours += `<span class = "selectable ${this.getClass(i)}">${i === 0 ? this.getToday():i}</span>`
         }
         for(let i = 0; i < number; i++){
-            hours += `<span class="${this.getClass(i)} selection">${this.getDate(i)}</span>`
+            hours += `<span class="selectable ${this.getClass(i)}">${this.getDate(i)}</span>`
         }
         return hours;
     }
@@ -40,12 +40,14 @@ class Hour{
     render(){
         return `
             <div class="hoursComp">
-                <div class="day box-wrap">
+                <div class="day">
                     ${this.getHours()}
                 </div>
             </div>
         `
     }
 }
+
+
 
 export default Hour;
