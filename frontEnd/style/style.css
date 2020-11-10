@@ -2,6 +2,12 @@
 
 body {
     font-family: "Lato", sans-serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 * {
@@ -199,8 +205,7 @@ span.highlight {
 }
 
 .ds-selected {
-    outline: 3px solid black;
-    outline-offset: 3px;
-    color: black;
+    background-color: cornflowerblue;
+    color: white;
     font-weight: bold;
 }

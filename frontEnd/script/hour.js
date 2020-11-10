@@ -1,8 +1,9 @@
 class Hour{
-    constructor(city, offset, gmt){
+    constructor(city, offset, gmt, index){
         this.city = city
         this.offset = offset
         this.gmt = gmt
+        this.index = index
     }
 
     getNow(){
@@ -18,21 +19,25 @@ class Hour{
     }
 
     getClass(i){
-        return `${i === 0 ? 'date':''} ${i===this.getNow()? 'focus':''}`
+        return `${i === 0 ? 'date':''} ${i===this.getNow()? 'ds-selected':''}`
     }
 
     getDate(i){
         return i === 0 ? (this.gmt < 0 ? this.getTomorrow():this.getToday()) :i
     }
 
+    getSelected = () => {
+        return this.ds.getSelection();
+    }
+
     getHours(){
         let hours = '';
         let number = this.offset < 0 ? (24 + this.offset) : this.offset
         for(let i = number; i < 24; i++){
-            hours += `<span class = "selectable ${this.getClass(i)}">${i === 0 ? this.getToday():i}</span>`
+            hours += `<span data-key = ${this.index} class = "selectable ${this.getClass(i)}">${i === 0 ? this.getToday():i}</span>`
         }
         for(let i = 0; i < number; i++){
-            hours += `<span class="selectable ${this.getClass(i)}">${this.getDate(i)}</span>`
+            hours += `<span data-key = ${this.index} class="selectable ${this.getClass(i)}">${this.getDate(i)}</span>`
         }
         return hours;
     }

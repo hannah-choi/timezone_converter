@@ -1,22 +1,19 @@
 
 import Search from './search.js'
 import TimezoneManager from './timezonemanager.js'
-import DragSelect from './lib/DragSelect.es6m.js'
 
 //import Search from './search.js'
 
-let ds = new DragSelect({
-    selectables: document.getElementsByClassName('selectable'),
-    callback: e => console.log(e)
-  });
+// let ds = new DragSelect({
+//     selectables: document.getElementsByClassName('selectable'),
+//     callback: e => console.log(e)
+//   });
 
 
 const searchInput = document.querySelector('.searchInput')
 const search = new Search()
 const suggestionList = document.querySelector('.suggestionList')
 const timezoneManager = new TimezoneManager()
-
-
 
 //const hourList = new Hour(0)
 searchInput.addEventListener('input', (e) => {search.displayMatches(e.target.value)})
@@ -38,3 +35,5 @@ suggestionList.addEventListener('click', (e)=>{
             return;
     }
 })
+
+
