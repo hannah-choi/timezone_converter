@@ -56,7 +56,7 @@ class Hour{
                         let hours = Array.from(elements).map(data => data.textContent)
                         let selectedHours = hours[0]+":00 - " + hours[hours.length-1] + ":00"
                         timeUpdate(selectedHours)
-                        timezoneListRender(i)
+                        //timezoneListRender()
                         // //let hours = Array.from(elements).map(data => data.textContent);
                         // //hours.filter(data => data = data.index === i)
                         // console.log(hours.filter(data => data = data.index === i))

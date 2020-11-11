@@ -32,22 +32,24 @@ class TimezoneManager{
         return difference;
     }
 
-    timezoneListRender = (index) => {
+    timezoneListRender = (timezone) => {
         const temp = document.createElement('div')
-        temp.innerHTML = this.groupList.map(data => data.timezone.render()).join('')
-        this.timezoneList.appendChild(temp.children[index])
+        temp.innerHTML = timezone.render()
+        this.timezoneList.appendChild(temp.children[0])
     }
+
+
 
     addZone(target) {
         const cityName = target.dataset.zone.replace(' ','_');
         const zoneName = cityName.split('/')
         .map(data => data[0].toUpperCase() + data.substr(1).toLowerCase()).join('/');
-        this.groupList.push(new TimezoneGroup(new Timezone(zoneName, this.getDifference(zoneName)), new Hour(zoneName, parseInt(this.getDifference(zoneName)), this.getGMT(cityName))))
-        let index = this.groupList.findIndex(data => data.hour.city === zoneName)
-        this.timezoneListRender(index)
+        const setTimezoneGroup = new TimezoneGroup(new Timezone(zoneName, this.getDifference(zoneName)), new Hour(zoneName, parseInt(this.getDifference(zoneName)), this.getGMT(cityName)))
+        this.groupList.push()
+        this.timezoneListRender(setTimezoneGroup.timezone)
         const temp = document.createElement('div')
-        temp.innerHTML = this.groupList.map(data => data.hour.render()).join('')
-        this.hoursList.appendChild(temp.children[index])
+        temp.innerHTML = setTimezoneGroup.hour.render()
+        this.hoursList.appendChild(temp.children[0])
         this.groupList.map((data,i) => data.hour.getDs(data.timezone.timeUpdate, this.timezoneListRender, i))
 
 
