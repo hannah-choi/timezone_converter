@@ -45,35 +45,27 @@ class Hour{
     }
 
 
-    getDs(timeUpdate, timezoneListRender, i){ 
+    getDs(timeUpdate){ 
         new DragSelect({
                     selectables: document.querySelectorAll(`div[data-key="${this.city}"] .selectable`),
                     callback: function(elements) { 
                         if(elements.length === 0){
                             return;
                         }
-                        console.log(elements)
                         let hours = Array.from(elements).map(data => data.textContent)
                         let selectedHours = hours[0]+":00 - " + hours[hours.length-1] + ":00"
                         timeUpdate(selectedHours)
-                        //timezoneListRender()
-                        // //let hours = Array.from(elements).map(data => data.textContent);
-                        // //hours.filter(data => data = data.index === i)
-                        // console.log(hours.filter(data => data = data.index === i))
-                        
-                        // // console.log(Timezone.selectedHours)
                     }
         })
     }
 
-    render(i){
-        return `
-            <div class="hoursComp">
-                <div class="day" data-key="${this.city}">
-                    ${this.getHours(i)}
-                </div>
-            </div>
-        `
+    render(){
+        const div = document.createElement('div')
+        div.classList.add('hoursComp')
+        div.innerHTML = `<div class="day" data-key="${this.city}">
+                            ${this.getHours()}
+                         </div>`
+        return div
     }
 }
 

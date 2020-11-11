@@ -10,25 +10,21 @@ class TimezoneGroup{
 
 
     render(){
-        this.hourListRender()
-        this.timezoneListRender()
+        this.hourRender()
+        this.timezoneRender()
     }
 
-    hourListRender(){
-        const temp = document.createElement('div')
-        temp.innerHTML = this.hour.render()
-        this.hoursList.appendChild(temp.children[0])
+    hourRender(){
+        this.hoursList.appendChild(this.hour.render())
         this.getDs()
     }
 
     getDs(){
-        this.hour.getDs(this.timezone.timeUpdate, this.timezoneListRender)
+        this.hour.getDs(this.timezone.timeUpdate, this.timezoneRender)
     }
 
-    timezoneListRender(){
-        const temp = document.createElement('div')
-        temp.innerHTML = this.timezone.render()
-        this.timezoneList.appendChild(temp.children[0])
+    timezoneRender(){
+        this.timezoneList.appendChild(this.timezone.render())
     }
 
 }

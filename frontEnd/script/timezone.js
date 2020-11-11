@@ -4,6 +4,7 @@ class Timezone{
         this.currentTimezone = city
         this.offset = offset
         this.time = null;
+        this.div = null;
     }
 
     static index = null;
@@ -38,6 +39,7 @@ class Timezone{
  
     timeUpdate = (time) => {
         this.time = time
+        this.div.querySelector('.time').innerHTML = time
     }
 
     getHourNumber(){
@@ -45,7 +47,9 @@ class Timezone{
     }
 
     render(){
-        return `
+        this.div = document.createElement('div')
+        this.div.classList.add('timezoneComp')
+        this.div.innerHTML  = `
             <div class="timezoneComp" >
                 <div class="home">
                 ${this.offset != 0 ? this.offset:'<img src="./../frontEnd/images/placeholder.svg">'}
@@ -66,6 +70,7 @@ class Timezone{
                 </div>
             </div>
                 `
+        return this.div
     }
 }
 
