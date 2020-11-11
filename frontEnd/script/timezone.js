@@ -1,9 +1,9 @@
 
 class Timezone{
-    constructor(city, offset, time){
+    constructor(city, offset){
         this.currentTimezone = city
         this.offset = offset
-        this.time = time
+        this.time = null;
     }
 
     static index = null;
@@ -36,14 +36,17 @@ class Timezone{
     }
 
  
+    timeUpdate = (time) => {
+        this.time = time
+    }
+
     getHourNumber(){
         return parseInt(moment.tz(`${this.currentTimezone}`).format('HH')) < 10 ? moment.tz(`${this.currentTimezone}`).format('HH').slice(-1) : moment.tz(`${this.currentTimezone}`).format('HH')
     }
 
-    render(i){
-        Timezone.index = i
+    render(){
         return `
-            <div class="timezoneComp" data-index="${i}">
+            <div class="timezoneComp" >
                 <div class="home">
                 ${this.offset != 0 ? this.offset:'<img src="./../frontEnd/images/placeholder.svg">'}
                                     </div>

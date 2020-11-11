@@ -1,9 +1,11 @@
+import Timezone from './timezone.js'
+
 class Hour{
-    constructor(city, offset, gmt, index){
+    constructor(city, offset, gmt, ds){
         this.city = city
         this.offset = offset
         this.gmt = gmt
-        this.index = index
+        this.ds =  ds
     }
 
     getNow(){
@@ -30,23 +32,45 @@ class Hour{
         return this.ds.getSelection();
     }
 
-    getHours(){
+    getHours(index){
         let hours = '';
         let number = this.offset < 0 ? (24 + this.offset) : this.offset
         for(let i = number; i < 24; i++){
-            hours += `<span data-key = ${this.index} class = "selectable ${this.getClass(i)}">${i === 0 ? this.getToday():i}</span>`
+            hours += `<span data-key = ${index} class = "selectable ${this.getClass(i)}">${i === 0 ? this.getToday():i}</span>`
         }
         for(let i = 0; i < number; i++){
-            hours += `<span data-key = ${this.index} class="selectable ${this.getClass(i)}">${this.getDate(i)}</span>`
+            hours += `<span data-key = ${index} class="selectable ${this.getClass(i)}">${this.getDate(i)}</span>`
         }
         return hours;
     }
 
-    render(){
+
+    getDs(timeUpdate, timezoneListRender, i){ 
+        new DragSelect({
+                    selectables: document.querySelectorAll(`div[data-key="${this.city}"] .selectable`),
+                    callback: function(elements) { 
+                        if(elements.length === 0){
+                            return;
+                        }
+                        console.log(elements)
+                        let hours = Array.from(elements).map(data => data.textContent)
+                        let selectedHours = hours[0]+":00 - " + hours[hours.length-1] + ":00"
+                        timeUpdate(selectedHours)
+                        timezoneListRender(i)
+                        // //let hours = Array.from(elements).map(data => data.textContent);
+                        // //hours.filter(data => data = data.index === i)
+                        // console.log(hours.filter(data => data = data.index === i))
+                        
+                        // // console.log(Timezone.selectedHours)
+                    }
+        })
+    }
+
+    render(i){
         return `
             <div class="hoursComp">
-                <div class="day">
-                    ${this.getHours()}
+                <div class="day" data-key="${this.city}">
+                    ${this.getHours(i)}
                 </div>
             </div>
         `
