@@ -6,6 +6,7 @@ class Hour{
         this.offset = offset
         this.gmt = gmt
         this.ds =  ds
+        this.div = null
     }
 
     getNow(){
@@ -44,31 +45,29 @@ class Hour{
         return hours;
     }
 
-
     getDs(timeUpdate){ 
         new DragSelect({
-                    selectables: document.querySelectorAll(`div[data-key="${this.city}"] .selectable`),
+                    selectables: this.div.querySelectorAll(`.selectable`),
                     callback: function(elements) { 
                         if(elements.length === 0){
                             return;
                         }
-                        let hours = Array.from(elements).map(data => data.textContent)
-                        let selectedHours = hours[0]+":00 - " + hours[hours.length-1] + ":00"
+                        let hours = Array.from(elements).map(data => isNaN(data.textContent) ? "00" : data.textContent).sort((a,b)=> a-b)
+                        //console.log(Number.isInteger(hours[0]))
+                        let selectedHours = hours[0] + ":00 - " + hours[hours.length-1] + ":00"
                         timeUpdate(selectedHours)
                     }
         })
     }
 
     render(){
-        const div = document.createElement('div')
-        div.classList.add('hoursComp')
-        div.innerHTML = `<div class="day" data-key="${this.city}">
-                            ${this.getHours()}
-                         </div>`
-        return div
+        this.div = document.createElement('div')
+        this.div.classList.add('hoursComp')
+        this.div.innerHTML = `<div class="day">
+                                 ${this.getHours()}
+                            </div>`
+        return this.div;
     }
 }
-
-
 
 export default Hour;

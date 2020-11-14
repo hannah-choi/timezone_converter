@@ -7,8 +7,6 @@ import DragSelect from './lib/DragSelect.es6m.js'
 class TimezoneManager{
 
     constructor(){
-        this.cityArray = [];
-        this.hourList = [];
         this.defaultTimezone = moment.tz.guess()
         this.defaultOffset = moment.tz(`${this.defaultTimezone}`).utcOffset()/60; 
         this.suggestionList = document.querySelector('.suggestionList')
@@ -30,7 +28,6 @@ class TimezoneManager{
         return difference;
     }
 
-
     addZone(target) {
         const cityName = target.dataset.zone.replace(' ','_');
         const zoneName = cityName.split('/')
@@ -43,8 +40,6 @@ class TimezoneManager{
         this.searchInput.value = '';
     }
 
-
-    
 }
 
 export default TimezoneManager;
