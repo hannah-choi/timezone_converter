@@ -1,4 +1,4 @@
-import Timezone from './timezone.js'
+import DragSelect from './lib/DragSelect.es6m.js'
 
 class Hour{
     constructor(city, offset, gmt, ds){
@@ -33,30 +33,35 @@ class Hour{
         return this.ds.getSelection();
     }
 
-    getHours(index){
+    getHours(){
         let hours = '';
         let number = this.offset < 0 ? (24 + this.offset) : this.offset
         for(let i = number; i < 24; i++){
-            hours += `<span data-key = ${index} class = "selectable ${this.getClass(i)}">${i === 0 ? this.getToday():i}</span>`
+            hours += `<span data-key = ${i} class = "selectable ${this.getClass(i)}">${i === 0 ? this.getToday():i}</span>`
         }
         for(let i = 0; i < number; i++){
-            hours += `<span data-key = ${index} class="selectable ${this.getClass(i)}">${this.getDate(i)}</span>`
+            hours += `<span data-key = ${i+100} class="selectable ${this.getClass(i)}">${this.getDate(i)}</span>`
         }
         return hours;
     }
 
     getDs(timeUpdate){ 
         new DragSelect({
-                    selectables: this.div.querySelectorAll(`.selectable`),
-                    callback: function(elements) { 
-                        if(elements.length === 0){
-                            return;
-                        }
-                        let hours = Array.from(elements).map(data => isNaN(data.textContent) ? "00" : data.textContent).sort((a,b)=> a-b)
-                        //console.log(Number.isInteger(hours[0]))
-                        let selectedHours = hours[0] + ":00 - " + hours[hours.length-1] + ":00"
-                        timeUpdate(selectedHours)
+            selectables: this.div.querySelectorAll(`.selectable`),
+            callback: function(elements) { 
+                if(elements.length === 0){
+                    return;
+                }
+                const a = isNaN(elements[0].textContent) === true? "00" : elements[0].textContent
+                const b = isNaN(elements[elements.length-1].textContent) === true? "00": elements[elements.length-1].textContent
+                const selectedHours = function(){
+                    if(elements.length === 1){
+                        return elements[0].textContent + ":00"
                     }
+                    return Math.min(a,b) + ":00 - " + Math.max(a,b) + ":00"
+                }
+                timeUpdate(selectedHours())
+            }
         })
     }
 

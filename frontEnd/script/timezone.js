@@ -7,8 +7,6 @@ class Timezone{
         this.div = null;
     }
 
-    static index = null;
-
     getCity(){
         return `${this.currentTimezone}`.split("/").pop().replace('_',' ')
     }
