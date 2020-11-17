@@ -22,7 +22,7 @@ class Hour{
     }
 
     getClass(i){
-        return `${i === 0 ? 'date':''} ${i===this.getNow()? 'ds-selected':''}`
+        return `${i === 0 ? 'date':''} ${i===this.getNow()? 'today':''}`
     }
 
     getDate(i){
@@ -48,24 +48,19 @@ class Hour{
     getDs(timeUpdate){ 
         new DragSelect({
             selectables: this.div.querySelectorAll(`.selectable`),
-            callback: function(elements) { 
-                if(elements.length === 0){
-                    return;
-                }
-                const number = function(a,b){
-                    let first = isNaN(a.textContent) === true? "00": Math.min(a.dataset.key,b.dataset.key)
-                    let last = isNaN(b.textContent) === true? "00": Math.max(a.dataset.key,b.dataset.key)
-                    return [first >= 100 ? first-100:first, last>=100? last-100:last]
-                }
-                const numbers = number(elements[0], elements[elements.length-1])
+            callback: () => { 
+                let selected = this.div.querySelectorAll('.ds-selected')
                 const selectedHours = function(){
-                    if(elements.length === 1){
-                        return elements[0].textContent + ":00"
+                    if(selected.length === 0){
+                        return;
                     }
-                    return numbers[0] + ":00 - " + numbers[1] + ":00"
+                    if(selected.length === 1){
+                        return selected[0].textContent + ":00"
+                    }
+                    return selected[0].textContent + ":00 - " + selected[selected.length-1].textContent + ":00"
                 }
                 timeUpdate(selectedHours())
-            }
+             }
         })
     }
 

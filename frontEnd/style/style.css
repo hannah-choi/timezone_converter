@@ -209,3 +209,9 @@ span.highlight {
     color: white;
     font-weight: bold;
 }
+
+.today {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
