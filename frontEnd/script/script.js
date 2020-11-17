@@ -13,13 +13,16 @@ searchInput.addEventListener('focusout', (e) => {suggestionList.style.opacity = 
 suggestionList.addEventListener('click', (e)=>{
     switch (e.target.className){
         case 'suggestionItem':
-            timezoneManager.addZone(e.target)    
+            timezoneManager.addZone(e.target)
+            search.disableSuggestion()
             break;
         case 'listTimezone':
             timezoneManager.addZone(e.target.parentElement)
+            search.disableSuggestion()
             break;
         case 'highlight':
             timezoneManager.addZone(e.target.parentElement.parentElement)
+            search.disableSuggestion()
             break;
         default:
             return;

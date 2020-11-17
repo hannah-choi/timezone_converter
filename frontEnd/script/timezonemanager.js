@@ -7,8 +7,6 @@ class TimezoneManager{
     constructor(){
         this.defaultTimezone = moment.tz.guess()
         this.defaultOffset = moment.tz(`${this.defaultTimezone}`).utcOffset()/60; 
-        this.suggestionList = document.querySelector('.suggestionList')
-        this.searchInput = document.querySelector('.searchInput')
         this.groupList = [];
     }
 
@@ -22,18 +20,12 @@ class TimezoneManager{
         return difference;
     }
 
-    disableSuggestion(){
-        this.suggestionList.innerHTML = '';
-        this.searchInput.value = '';
-    }
-
     addZone(target) {
         const cityName = target.dataset.zone.replace(' ','_');
         const zoneName = cityName.split('/')
         .map(data => data[0].toUpperCase() + data.substr(1).toLowerCase()).join('/');
         const setTimezoneGroup = new TimezoneGroup(new Timezone(zoneName, this.getDifference(zoneName)), new Hour(zoneName, parseInt(this.getDifference(zoneName)), this.getGMT(cityName)))
         this.groupList.push(setTimezoneGroup)
-        this.disableSuggestion()
     }
 
 }

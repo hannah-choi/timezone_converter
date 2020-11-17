@@ -40,10 +40,6 @@ class Timezone{
         this.div.querySelector('.time').innerHTML = time
     }
 
-    getHourNumber(){
-        return parseInt(moment.tz(`${this.currentTimezone}`).format('HH')) < 10 ? moment.tz(`${this.currentTimezone}`).format('HH').slice(-1) : moment.tz(`${this.currentTimezone}`).format('HH')
-    }
-
     render(){
         this.div = document.createElement('div')
         this.div.classList.add('timezoneComp')
@@ -51,7 +47,8 @@ class Timezone{
             <div class="timezoneComp" >
                 <div class="home">
                 ${this.offset != 0 ? this.offset:'<img src="./../frontEnd/images/placeholder.svg">'}
-                                    </div>
+                <span class="makeHome">${this.offset == 0 ? '':'<img class = "makeHome" src="./../frontEnd/images/home.svg">'}</span>
+                </div>
                 <div class="timezone">
                     <div class="timezone1">
                         <span class="cityName homeCity">${this.getCity()}</span>

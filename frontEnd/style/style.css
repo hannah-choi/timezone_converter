@@ -53,7 +53,13 @@ div.modify {
 }
 
 div.home img {
-    width: 15px;
+    margin-top: 3px;
+    width: 14px;
+}
+
+span.makeHome img {
+    width: 13px;
+    margin-top: 14px;
 }
 
 div.modify img {

@@ -33,18 +33,14 @@ class Hour{
         return i === 0 ? (this.gmt < 0 ? this.getTomorrow():this.getToday()) :i
     }
 
-    getSelected = () => {
-        return this.ds.getSelection();
-    }
-
     getHours(){
         let hours = '';
         let number = this.offset < 0 ? (24 + this.offset) : this.offset
         for(let i = number; i < 24; i++){
-            hours += `<span data-key = ${i} class = "selectable ${this.getClass(i)}">${i === 0 ? this.getToday():i}</span>`
+            hours += `<span class = "selectable ${this.getClass(i)}">${i === 0 ? this.getToday():i}</span>`
         }
         for(let i = 0; i < number; i++){
-            hours += `<span data-key = ${i+100} class="selectable ${this.getClass(i)}">${this.getDate(i)}</span>`
+            hours += `<span class="selectable ${this.getClass(i)}">${this.getDate(i)}</span>`
         }
         return hours;
     }
@@ -55,16 +51,22 @@ class Hour{
             callback: () => { 
                 let selected = this.div.querySelectorAll('.ds-selected')
                 let now = this.getCurrentTime()
-                const selectedHours = function(){
-                    if(selected.length === 0){
-                        return now;
+                const returnZero = function(number){
+                    if(number.classList.contains('date')) {
+                        return "00"
                     }
-                    if(selected.length === 1){
-                        return selected[0].textContent + ":00"
-                    }
-                    return selected[0].textContent + ":00 - " + selected[selected.length-1].textContent + ":00"
+                    return number.textContent
                 }
-                timeUpdate(selectedHours())
+                let time = now
+                // if (selected.length === 0){
+                //     return;
+                // }
+                if(selected.length === 1){
+                    time = returnZero(selected[0]) + ":00"
+                } else {
+                    time = returnZero(selected[0]) + ":00 - " + returnZero(selected[selected.length-1]) + ":00"
+                }
+                timeUpdate(time)
              }
         })
     }

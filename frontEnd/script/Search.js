@@ -3,12 +3,18 @@ class Search{
     constructor(){
         this.timezoneDb = Object.keys(moment.tz._zones).map(data=> data.replace('_','/')).map(data=> data.replace('_',' '))
         this.suggestionList = document.querySelector('.suggestionList')
+        this.searchInput = document.querySelector('.searchInput')
         this.matchArray = [];
     }
 
     findMatches(typedWord, timezoneDb){
         const regex = new RegExp(typedWord, 'gi')
         return timezoneDb.filter(timezone => timezone.match(regex))
+    }
+
+    disableSuggestion(){
+        this.suggestionList.innerHTML = '';
+        this.searchInput.value = '';
     }
 
     displayMatches = (value) => {

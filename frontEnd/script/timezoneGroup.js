@@ -8,6 +8,8 @@ class TimezoneGroup{
         this.render()
     }
 
+    changeDefaultZone(){
+    }
 
     render(){
         this.hourRender()
