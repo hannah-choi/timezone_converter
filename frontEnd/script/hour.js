@@ -52,13 +52,17 @@ class Hour{
                 if(elements.length === 0){
                     return;
                 }
-                const a = isNaN(elements[0].textContent) === true? "00" : elements[0].textContent
-                const b = isNaN(elements[elements.length-1].textContent) === true? "00": elements[elements.length-1].textContent
+                const number = function(a,b){
+                    let first = isNaN(a.textContent) === true? "00": Math.min(a.dataset.key,b.dataset.key)
+                    let last = isNaN(b.textContent) === true? "00": Math.max(a.dataset.key,b.dataset.key)
+                    return [first >= 100 ? first-100:first, last>=100? last-100:last]
+                }
+                const numbers = number(elements[0], elements[elements.length-1])
                 const selectedHours = function(){
                     if(elements.length === 1){
                         return elements[0].textContent + ":00"
                     }
-                    return Math.min(a,b) + ":00 - " + Math.max(a,b) + ":00"
+                    return numbers[0] + ":00 - " + numbers[1] + ":00"
                 }
                 timeUpdate(selectedHours())
             }
