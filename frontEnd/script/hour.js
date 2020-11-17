@@ -13,8 +13,12 @@ class Hour{
         return parseInt(moment.tz(`${this.city}`).format('HH'))
     }
 
+    getCurrentTime(){
+        return moment.tz(`${this.city}`).format('HH:mm')
+    }
+
     getToday(){
-        return moment.tz(`${this.city}`).format('DD MMM')   
+        return moment.tz(`${this.city}`).format('DD MMM')
     }
 
     getTomorrow(){
@@ -50,9 +54,10 @@ class Hour{
             selectables: this.div.querySelectorAll(`.selectable`),
             callback: () => { 
                 let selected = this.div.querySelectorAll('.ds-selected')
+                let now = this.getCurrentTime()
                 const selectedHours = function(){
                     if(selected.length === 0){
-                        return;
+                        return now;
                     }
                     if(selected.length === 1){
                         return selected[0].textContent + ":00"
