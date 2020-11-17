@@ -1,16 +1,13 @@
+import TimezoneGroup from './timezoneGroup.js'
 import Timezone from './timezone.js'
 import Hour from './hour.js'
 
 class TimezoneManager{
 
     constructor(){
-        this.cityArray = [];
-        this.cityList = [];
-        this.hourList = [];
-        this.timezoneList = document.querySelector('.timezoneList')
-        this.hoursList = document.querySelector('.hoursList')
         this.defaultTimezone = moment.tz.guess()
         this.defaultOffset = moment.tz(`${this.defaultTimezone}`).utcOffset()/60; 
+        this.groupList = [];
     }
 
     getGMT(city){
@@ -24,14 +21,13 @@ class TimezoneManager{
     }
 
     addZone(target) {
-        const cityName = target.dataset.zone.replace(' ','_')
+        const cityName = target.dataset.zone.replace(' ','_');
         const zoneName = cityName.split('/')
-        .map(data => data[0].toUpperCase() + data.substr(1).toLowerCase()).join('/')
-        this.cityList.push(new Timezone(zoneName, this.getDifference(zoneName)))
-        this.timezoneList.innerHTML = this.cityList.map(city => city.render()).join('')
-        this.hourList.push(new Hour(zoneName, parseInt(this.getDifference(zoneName)), this.getGMT(cityName)))
-        this.hoursList.innerHTML = this.hourList.map(hour=>hour.render()).join('')
+        .map(data => data[0].toUpperCase() + data.substr(1).toLowerCase()).join('/');
+        const setTimezoneGroup = new TimezoneGroup(new Timezone(zoneName, this.getDifference(zoneName)), new Hour(zoneName, parseInt(this.getDifference(zoneName)), this.getGMT(cityName)))
+        this.groupList.push(setTimezoneGroup)
     }
+
 }
 
 export default TimezoneManager;
