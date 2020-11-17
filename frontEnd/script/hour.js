@@ -50,18 +50,17 @@ class Hour{
             selectables: this.div.querySelectorAll(`.selectable`),
             callback: () => { 
                 let selected = this.div.querySelectorAll('.ds-selected')
-                let now = this.getCurrentTime()
+                let time = null
                 const returnZero = function(number){
                     if(number.classList.contains('date')) {
                         return "00"
                     }
                     return number.textContent
                 }
-                let time = now
-                // if (selected.length === 0){
-                //     return;
-                // }
-                if(selected.length === 1){
+               
+                if (selected.length === 0){
+                    time = this.getCurrentTime()
+                } else if(selected.length === 1){
                     time = returnZero(selected[0]) + ":00"
                 } else {
                     time = returnZero(selected[0]) + ":00 - " + returnZero(selected[selected.length-1]) + ":00"

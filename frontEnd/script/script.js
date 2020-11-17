@@ -11,22 +11,22 @@ searchInput.addEventListener('input', (e) => {search.displayMatches(e.target.val
 searchInput.addEventListener('focusout', (e) => {suggestionList.style.opacity = 0})
 
 suggestionList.addEventListener('click', (e)=>{
+    let target = null
     switch (e.target.className){
         case 'suggestionItem':
-            timezoneManager.addZone(e.target)
-            search.disableSuggestion()
+            target = e.target
             break;
         case 'listTimezone':
-            timezoneManager.addZone(e.target.parentElement)
-            search.disableSuggestion()
+            target = e.target.parentElement
             break;
         case 'highlight':
-            timezoneManager.addZone(e.target.parentElement.parentElement)
-            search.disableSuggestion()
+            target = e.target.parentElement.parentElement
             break;
         default:
             return;
     }
+    timezoneManager.addZone(target)
+    search.disableSuggestion()
 })
 
 
