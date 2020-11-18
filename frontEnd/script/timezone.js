@@ -34,6 +34,10 @@ class Timezone{
         return moment.tz(`${this.currentTimezone}`).format("Z").split(':').shift()
     }
 
+    remove(){
+        this.div.remove()
+    }
+
     offsetUpdate = (offset) => {
         this.offset = offset
     }

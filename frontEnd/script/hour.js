@@ -33,6 +33,10 @@ class Hour{
         return i === 0 ? (this.gmt < 0 ? this.getTomorrow():this.getToday()) :i
     }
 
+    remove(){
+        this.div.remove()
+    }
+
     getHours(){
         let hours = '';
         let number = this.offset < 0 ? (24 + this.offset) : this.offset

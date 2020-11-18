@@ -27,6 +27,11 @@ class TimezoneGroup{
         this.hour.getDs(this.timezone.timeUpdate, this.timezoneRender)
     }
 
+    remove(){
+        this.hour.remove()
+        this.timezone.remove()
+    }
+
     timezoneRender(){
         this.timezoneList.appendChild(this.timezone.render())
     }

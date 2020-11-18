@@ -5,9 +5,9 @@ import Hour from './hour.js'
 class TimezoneManager{
 
     constructor(){
-        this.defaultTimezone = moment.tz.guess()
-        this.defaultOffset = moment.tz(`${this.defaultTimezone}`).utcOffset()/60; 
+        this.setDefault()
         this.groupList = [];
+        
         this.setTimezoneGroup = null;
     }
 
@@ -30,12 +30,31 @@ class TimezoneManager{
         this.groupList.push(this.setTimezoneGroup)
     }
 
-    changeZone = (city) => {
+    setDefault(city = moment.tz.guess()){
         this.defaultTimezone = city
-        this.getDifference(city)
-        const zoneName = city
-        const cityName = city.toLowerCase()
-        this.setTimezoneGroup = new TimezoneGroup(new Timezone(zoneName, this.getDifference(zoneName)), new Hour(zoneName, parseInt(this.getDifference(zoneName)), this.getGMT(cityName)))
+        this.defaultOffset = moment.tz(city).utcOffset()/60
+    }
+
+    changeZone(city){
+        //console.log(this.groupList)
+        this.setDefault(city)
+        this.groupList.map(data => {
+            data.remove()
+            return new TimezoneGroup(new Timezone(data.hour.city, this.getDifference(data.hour.city)), new Hour(data.hour.city, parseInt(this.getDifference(data.hour.city)), this.getGMT(data.hour.city.toLowerCase())))
+        })
+
+
+
+
+        //this.getDifference(city)
+        // let index = this.groupList.findIndex(data => data.hour.city === city)
+        
+        // const zoneName = city
+        // const cityName = city.toLowerCase()
+        
+        // this.groupList[index].timezone.offset = this.getDifference(city)
+        // this.groupList[index].hour.offset = parseInt(this.getDifference(zoneName))
+        
         //this.setTimezoneGroup = new TimezoneGroup(new Timezone(zoneName, this.getDifference(zoneName)), new Hour(zoneName, parseInt(this.getDifference(zoneName)), this.getGMT(cityName)))
         // console.log(this.groupList.map(data=> data.timezone.offset))
         // console.log(this.groupList.map(data=> data.hour.offset))
