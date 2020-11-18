@@ -1,16 +1,15 @@
+import Timezone from './timezone.js'
+import Hour from './hour.js'
+
 class TimezoneGroup{
 
-    constructor(timezone, hour){
-        this.timezone = timezone;
-        this.hour = hour;
+    constructor(city, offset, gmt){
+        this.timezone = new Timezone(city, offset);
+        this.hour = new Hour(city, parseInt(offset), gmt);
+        this.city = city;
         this.timezoneList = document.querySelector('.timezoneList')
         this.hoursList = document.querySelector('.hoursList')
         this.render()
-    }
-
-    changeDefaultZone(){
-        this.timezone.change
-        //this.timezone.
     }
 
     render(){

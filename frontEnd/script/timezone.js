@@ -37,10 +37,6 @@ class Timezone{
     remove(){
         this.div.remove()
     }
-
-    offsetUpdate = (offset) => {
-        this.offset = offset
-    }
  
     timeUpdate = (time) => {
         this.time = time

@@ -10,7 +10,7 @@ const timezoneArea = document.querySelector('.timezoneList')
 
 timezoneArea.addEventListener('click', ({target})=>{
     if(target.className != 'makeHome'){
-        return
+        return;
     }
     timezoneManager.changeZone(target.dataset.city)
 })
