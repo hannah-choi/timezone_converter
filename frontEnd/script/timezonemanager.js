@@ -25,7 +25,6 @@ class TimezoneManager{
         const cityName = target.dataset.zone.replace(' ','_');
         const zoneName = cityName.split('/')
         .map(data => data[0].toUpperCase() + data.substr(1).toLowerCase()).join('/');
-        console.log(cityName, zoneName)
         this.setTimezoneGroup = new TimezoneGroup(new Timezone(zoneName, this.getDifference(zoneName)), new Hour(zoneName, parseInt(this.getDifference(zoneName)), this.getGMT(cityName)))
         this.groupList.push(this.setTimezoneGroup)
     }
@@ -38,13 +37,15 @@ class TimezoneManager{
     changeZone(city){
         //console.log(this.groupList)
         this.setDefault(city)
-        this.groupList.map(data => {
+        this.groupList = this.groupList.map(data => {
             data.remove()
             return new TimezoneGroup(new Timezone(data.hour.city, this.getDifference(data.hour.city)), new Hour(data.hour.city, parseInt(this.getDifference(data.hour.city)), this.getGMT(data.hour.city.toLowerCase())))
         })
+        console.log(this.groupList)
 
-
-
+        // const arr = ['a','b','c']
+        // arr.map(data => `${data}1`)
+        // console.log(arr)
 
         //this.getDifference(city)
         // let index = this.groupList.findIndex(data => data.hour.city === city)
