@@ -31,6 +31,11 @@ class TimezoneManager{
         this.defaultOffset = moment.tz(city).utcOffset()/60
     }
 
+    removeZone(city){
+        const index = this.groupList.findIndex(data => data.city === city)
+        this.groupList[index].remove()
+    }
+
     changeZone(city){
         this.setDefault(city)
         this.groupList = this.groupList.map(data => {

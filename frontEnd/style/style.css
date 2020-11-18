@@ -222,6 +222,7 @@ span.highlight {
     font-weight: bold;
 }
 
-.makeHome:hover {
+.makeHome:hover,
+.remove:hover {
     cursor: pointer;
 }

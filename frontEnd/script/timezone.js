@@ -64,7 +64,7 @@ class Timezone{
                     </div>
                 </div>
                 <div class="modify">
-                        <img src="images/cancel.svg" width="10px">
+                        <img class ="remove" data-city = ${this.currentTimezone} src="images/cancel.svg" width="10px">
                 </div>
             </div>
                 `
