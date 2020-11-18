@@ -9,6 +9,8 @@ class TimezoneGroup{
     }
 
     changeDefaultZone(){
+        this.timezone.change
+        //this.timezone.
     }
 
     render(){
