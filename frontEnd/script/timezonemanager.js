@@ -1,17 +1,19 @@
 import TimezoneGroup from './timezoneGroup.js'
-import Timezone from './timezone.js'
-import Hour from './hour.js'
 
 class TimezoneManager{
 
     constructor(){
-        this.defaultTimezone = moment.tz.guess()
-        this.defaultOffset = moment.tz(`${this.defaultTimezone}`).utcOffset()/60; 
+        this.setDefault()
         this.groupList = [];
+        this.setTimezoneGroup = null;
     }
 
-    getGMT(city){
-        return moment.tz(city).utcOffset()/60
+    addZone(target) {
+        const cityName = target.dataset.zone.replace(' ','_');
+        const zoneName = cityName.split('/')
+        .map(data => data[0].toUpperCase() + data.substr(1).toLowerCase()).join('/');
+        this.setTimezoneGroup = new TimezoneGroup(zoneName, this.getDifference(zoneName), this.getGMT(zoneName))
+        this.groupList.push(this.setTimezoneGroup)
     }
 
     getDifference(city){
@@ -20,14 +22,27 @@ class TimezoneManager{
         return difference;
     }
 
-    addZone(target) {
-        const cityName = target.dataset.zone.replace(' ','_');
-        const zoneName = cityName.split('/')
-        .map(data => data[0].toUpperCase() + data.substr(1).toLowerCase()).join('/');
-        const setTimezoneGroup = new TimezoneGroup(new Timezone(zoneName, this.getDifference(zoneName)), new Hour(zoneName, parseInt(this.getDifference(zoneName)), this.getGMT(cityName)))
-        this.groupList.push(setTimezoneGroup)
+    getGMT(city){
+        return moment.tz(city).utcOffset()/60
+    }
+
+    setDefault(city = moment.tz.guess()){
+        this.defaultTimezone = city
+        this.defaultOffset = moment.tz(city).utcOffset()/60
+    }
+
+    removeZone(city){
+        const index = this.groupList.findIndex(data => data.city === city)
+        this.groupList[index].remove()
+    }
+
+    changeZone(city){
+        this.setDefault(city)
+        this.groupList = this.groupList.map(data => {
+            data.remove()
+            return new TimezoneGroup(data.city, this.getDifference(data.city), this.getGMT(data.city))
+        })
     }
 
 }
-
 export default TimezoneManager;

@@ -6,6 +6,21 @@ const searchInput = document.querySelector('.searchInput')
 const search = new Search()
 const suggestionList = document.querySelector('.suggestionList')
 const timezoneManager = new TimezoneManager()
+const timezoneArea = document.querySelector('.timezoneList')
+
+timezoneArea.addEventListener('click', ({target})=>{
+    switch (target.className){
+        case 'makeHome':
+            timezoneManager.changeZone(target.dataset.city)
+            break;
+        case 'remove':
+            timezoneManager.removeZone(target.dataset.city)
+            break;
+        default:
+            return;        
+    }
+
+})
 
 searchInput.addEventListener('input', (e) => {search.displayMatches(e.target.value)})
 searchInput.addEventListener('focusout', (e) => {suggestionList.style.opacity = 0})
